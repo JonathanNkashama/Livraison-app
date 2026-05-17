@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "mobile-client2",
+    "slug": "mobile-client2",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "updates": {
+      "enabled": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FF6B35"
+      }
+    }
+  }
+}

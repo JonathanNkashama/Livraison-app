@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Livraison Partner",
+    "slug": "livraison-partner",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "updates": { "enabled": false },
+    "android": { "adaptiveIcon": { "backgroundColor": "#2ecc71" } }
+  }
+}
