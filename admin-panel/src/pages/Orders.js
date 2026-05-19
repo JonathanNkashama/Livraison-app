@@ -1,3 +1,4 @@
+import API from '../api';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +11,7 @@ export default function Orders() {
   useEffect(() => { charger(); }, []);
 
   const charger = async () => {
-    const res = await axios.get('https://livraison-app-production-be7f.up.railway.app/', {
+    const res = await axios.get('${API}', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setCommandes(res.data);
@@ -18,7 +19,7 @@ export default function Orders() {
 
   const annuler = async (id) => {
     if (window.confirm('Annuler cette commande ?')) {
-      await axios.put(`https://livraison-app-production-be7f.up.railway.app//${id}/annuler`, {}, {
+      await axios.put(`${API}//${id}/annuler`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Commande annulée !');

@@ -1,3 +1,4 @@
+import API from '../api';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -11,14 +12,14 @@ export default function Partners() {
   useEffect(() => { charger(); }, [filtre]);
 
   const charger = async () => {
-    const res = await axios.get(`https://livraison-app-production-be7f.up.railway.app//api/admin/partenaires?valide=${filtre}`, {
+    const res = await axios.get(`${API}//api/admin/partenaires?valide=${filtre}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setPartenaires(res.data);
   };
 
   const valider = async (id, email, nom) => {
-    await axios.put(`https://livraison-app-production-be7f.up.railway.app//api/admin/partenaires/${id}/valider`, {}, {
+    await axios.put(`${API}//api/admin/partenaires/${id}/valider`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     });
     alert(`✅ ${nom} validé ! Un email lui a été envoyé.`);
@@ -26,7 +27,7 @@ export default function Partners() {
   };
 
   const suspendre = async (id) => {
-    await axios.put(`https://livraison-app-production-be7f.up.railway.app//api/admin/partenaires/${id}/suspendre`, {}, {
+    await axios.put(`${API}//api/admin/partenaires/${id}/suspendre`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     });
     alert('Partenaire suspendu !');

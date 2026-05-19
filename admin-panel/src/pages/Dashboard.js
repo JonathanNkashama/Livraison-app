@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API from '../api';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({});
@@ -8,16 +9,13 @@ export default function Dashboard() {
   const token = localStorage.getItem('adminToken');
 
   useEffect(() => {
-    axios.get('https://livraison-app-production-be7f.up.railway.app/', {
+    axios.get(`${API}/api/admin/stats`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setStats(res.data))
       .catch(() => navigate('/login'));
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem('adminToken');
-    navigate('/login');
-  };
+  const logout = () => { localStorage.removeItem('adminToken'); navigate('/login'); };
 
   return (
     <div style={styles.container}>
@@ -29,38 +27,16 @@ export default function Dashboard() {
         <button style={styles.navBtn} onClick={() => navigate('/finance')}>💰 Finance</button>
         <button style={{...styles.navBtn, marginTop: 'auto', color: '#e74c3c'}} onClick={logout}>🚪 Déconnexion</button>
       </div>
-
       <div style={styles.main}>
         <h1 style={styles.titre}>Tableau de bord</h1>
         <div style={styles.grid}>
-          <div style={styles.card}>
-            <p style={styles.cardLabel}>Total Clients</p>
-            <p style={styles.cardValue}>{stats.total_clients || 0}</p>
-          </div>
-          <div style={styles.card}>
-            <p style={styles.cardLabel}>Partenaires actifs</p>
-            <p style={styles.cardValue}>{stats.total_partenaires || 0}</p>
-          </div>
-          <div style={{...styles.card, borderLeft: '4px solid #e74c3c'}}>
-            <p style={styles.cardLabel}>En attente validation</p>
-            <p style={styles.cardValue}>{stats.partenaires_en_attente || 0}</p>
-          </div>
-          <div style={styles.card}>
-            <p style={styles.cardLabel}>Total Commandes</p>
-            <p style={styles.cardValue}>{stats.total_commandes || 0}</p>
-          </div>
-          <div style={{...styles.card, borderLeft: '4px solid #2ecc71'}}>
-            <p style={styles.cardLabel}>Chiffre d'affaires</p>
-            <p style={styles.cardValue}>{Number(stats.chiffre_affaires || 0).toLocaleString()} $</p>
-          </div>
-          <div style={{...styles.card, borderLeft: '4px solid #FF6B35'}}>
-            <p style={styles.cardLabel}>Mes revenus (15%)</p>
-            <p style={styles.cardValue}>{Number(stats.mes_revenus || 0).toLocaleString()} $</p>
-          </div>
-          <div style={{...styles.card, borderLeft: '4px solid #f39c12'}}>
-            <p style={styles.cardLabel}>À reverser aux partenaires</p>
-            <p style={styles.cardValue}>{Number(stats.a_reverser || 0).toLocaleString()} $</p>
-          </div>
+          <div style={styles.card}><p style={styles.cardLabel}>Total Clients</p><p style={styles.cardValue}>{stats.total_clients || 0}</p></div>
+          <div style={styles.card}><p style={styles.cardLabel}>Partenaires actifs</p><p style={styles.cardValue}>{stats.total_partenaires || 0}</p></div>
+          <div style={{...styles.card, borderLeft: '4px solid #e74c3c'}}><p style={styles.cardLabel}>En attente validation</p><p style={styles.cardValue}>{stats.partenaires_en_attente || 0}</p></div>
+          <div style={styles.card}><p style={styles.cardLabel}>Total Commandes</p><p style={styles.cardValue}>{stats.total_commandes || 0}</p></div>
+          <div style={{...styles.card, borderLeft: '4px solid #2ecc71'}}><p style={styles.cardLabel}>Chiffre d'affaires</p><p style={styles.cardValue}>{Number(stats.chiffre_affaires || 0).toLocaleString()} $</p></div>
+          <div style={{...styles.card, borderLeft: '4px solid #FF6B35'}}><p style={styles.cardLabel}>Mes revenus (15%)</p><p style={styles.cardValue}>{Number(stats.mes_revenus || 0).toLocaleString()} $</p></div>
+          <div style={{...styles.card, borderLeft: '4px solid #f39c12'}}><p style={styles.cardLabel}>À reverser</p><p style={styles.cardValue}>{Number(stats.a_reverser || 0).toLocaleString()} $</p></div>
         </div>
       </div>
     </div>

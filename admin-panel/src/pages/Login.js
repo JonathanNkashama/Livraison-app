@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API = 'https://livraison-app-production-be7f.up.railway.app';
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -8,7 +10,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('https://livraison-app-production-be7f.up.railway.app/', {
+      const res = await axios.post(`${API}/api/auth/admin/login`, {
         email, mot_de_passe: password
       });
       localStorage.setItem('adminToken', res.data.token);
@@ -24,22 +26,9 @@ export default function Login() {
         <h1 style={styles.titre}>🛵 Admin Panel</h1>
         <p style={styles.sous}>Connexion administrateur</p>
         {erreur && <p style={styles.erreur}>{erreur}</p>}
-        <input
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <input
-          style={styles.input}
-          placeholder="Mot de passe"
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <button style={styles.btn} onClick={handleLogin}>
-          Se connecter
-        </button>
+        <input style={styles.input} placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input style={styles.input} placeholder="Mot de passe" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <button style={styles.btn} onClick={handleLogin}>Se connecter</button>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import API from '../api';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +11,7 @@ export default function Finance() {
   useEffect(() => { charger(); }, []);
 
   const charger = async () => {
-    const res = await axios.get('https://livraison-app-production-be7f.up.railway.app/', {
+    const res = await axios.get('${API}', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setPartenaires(res.data);
@@ -19,7 +20,7 @@ export default function Finance() {
   const reverser = async (id, montant, nom) => {
     if (montant <= 0) return alert('Solde insuffisant');
     if (window.confirm(`Reverser ${Number(montant).toLocaleString()} FCFA à ${nom} ?`)) {
-      await axios.post('http://localhost:5000/api/admin/finance/reverser',
+      await axios.post('${API}/api/admin/finance/reverser',
         { partenaire_id: id, montant },
         { headers: { Authorization: `Bearer ${token}` } }
       );
