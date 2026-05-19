@@ -8,7 +8,7 @@ export default function Dashboard() {
   const token = localStorage.getItem('adminToken');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/admin/stats', {
+    axios.get('https://livraison-app-production-be7f.up.railway.app/', {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setStats(res.data))
       .catch(() => navigate('/login'));

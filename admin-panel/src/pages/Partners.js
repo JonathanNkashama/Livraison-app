@@ -11,14 +11,14 @@ export default function Partners() {
   useEffect(() => { charger(); }, [filtre]);
 
   const charger = async () => {
-    const res = await axios.get(`http://localhost:5000/api/admin/partenaires?valide=${filtre}`, {
+    const res = await axios.get(`https://livraison-app-production-be7f.up.railway.app//api/admin/partenaires?valide=${filtre}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setPartenaires(res.data);
   };
 
   const valider = async (id, email, nom) => {
-    await axios.put(`http://localhost:5000/api/admin/partenaires/${id}/valider`, {}, {
+    await axios.put(`https://livraison-app-production-be7f.up.railway.app//api/admin/partenaires/${id}/valider`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     });
     alert(`✅ ${nom} validé ! Un email lui a été envoyé.`);
@@ -26,7 +26,7 @@ export default function Partners() {
   };
 
   const suspendre = async (id) => {
-    await axios.put(`http://localhost:5000/api/admin/partenaires/${id}/suspendre`, {}, {
+    await axios.put(`https://livraison-app-production-be7f.up.railway.app//api/admin/partenaires/${id}/suspendre`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     });
     alert('Partenaire suspendu !');

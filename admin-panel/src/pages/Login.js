@@ -8,7 +8,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/admin/login', {
+      const res = await axios.post('https://livraison-app-production-be7f.up.railway.app/', {
         email, mot_de_passe: password
       });
       localStorage.setItem('adminToken', res.data.token);

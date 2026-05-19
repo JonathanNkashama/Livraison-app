@@ -10,7 +10,7 @@ export default function Finance() {
   useEffect(() => { charger(); }, []);
 
   const charger = async () => {
-    const res = await axios.get('http://localhost:5000/api/admin/finance/partenaires', {
+    const res = await axios.get('https://livraison-app-production-be7f.up.railway.app/', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setPartenaires(res.data);

@@ -10,7 +10,7 @@ export default function Orders() {
   useEffect(() => { charger(); }, []);
 
   const charger = async () => {
-    const res = await axios.get('http://localhost:5000/api/admin/commandes', {
+    const res = await axios.get('https://livraison-app-production-be7f.up.railway.app/', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setCommandes(res.data);
@@ -18,7 +18,7 @@ export default function Orders() {
 
   const annuler = async (id) => {
     if (window.confirm('Annuler cette commande ?')) {
-      await axios.put(`http://localhost:5000/api/admin/commandes/${id}/annuler`, {}, {
+      await axios.put(`https://livraison-app-production-be7f.up.railway.app//${id}/annuler`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Commande annulée !');
