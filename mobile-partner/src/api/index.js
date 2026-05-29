@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://livraison-app-production-be7f.up.railway.app/api';
+export const BASE_URL = 'https://livraison-app-bnwk.vercel.app/api';
 
 const api = axios.create({ baseURL: BASE_URL });
 

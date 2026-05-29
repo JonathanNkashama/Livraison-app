@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API = 'https://livraison-app-production-be7f.up.railway.app';
+const API = 'https://livraison-app-production-be7f.up.railway.ap';
 
 export default function Login() {
   const [email, setEmail] = useState('');

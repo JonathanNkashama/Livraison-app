@@ -1,2 +1,2 @@
-const API = 'https://livraison-app-production-be7f.up.railway.app';
+const API = 'https://livraison-app-bnwk.vercel.app';
 export default API;
