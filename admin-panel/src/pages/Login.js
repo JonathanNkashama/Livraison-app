@@ -3,23 +3,23 @@ import axios from 'axios';
 
 const API = 'https://livraison-app-bnwk.vercel.app';
 
-export default function Login() {
+export default function Login({ setToken }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [erreur, setErreur] = useState('');
 
-  const handleLogin = async ({ setToken }) => {
-  try {
-    const res = await axios.post(`${API}/api/auth/admin/login`, {
-      email, mot_de_passe: password
-    });
-    localStorage.setItem('adminToken', res.data.token);
-    setToken(res.data.token);
-    window.location.href = '/dashboard';
-  } catch (err) {
-    setErreur('Email ou mot de passe incorrect');
-  }
-};
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post(`${API}/api/auth/admin/login`, {
+        email, mot_de_passe: password
+      });
+      localStorage.setItem('adminToken', res.data.token);
+      setToken(res.data.token);
+      window.location.href = '/dashboard';
+    } catch (err) {
+      setErreur('Email ou mot de passe incorrect');
+    }
+  };
 
   return (
     <div style={styles.container}>
