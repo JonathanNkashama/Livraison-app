@@ -15,7 +15,6 @@ export default function Login({ setToken }) {
       });
       localStorage.setItem('adminToken', res.data.token);
       setToken(res.data.token);
-      window.location.href = '/dashboard';
     } catch (err) {
       setErreur('Email ou mot de passe incorrect');
     }
