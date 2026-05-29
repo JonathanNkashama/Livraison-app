@@ -11,21 +11,21 @@ export default function Orders() {
   useEffect(() => { charger(); }, []);
 
   const charger = async () => {
-    const res = await axios.get('${API}', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    setCommandes(res.data);
-  };
+  const res = await axios.get(`${API}/api/admin/commandes`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  setCommandes(res.data);
+};
 
   const annuler = async (id) => {
-    if (window.confirm('Annuler cette commande ?')) {
-      await axios.put(`${API}//${id}/annuler`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      alert('Commande annulée !');
-      charger();
-    }
-  };
+  if (window.confirm('Annuler cette commande ?')) {
+    await axios.put(`${API}/api/admin/commandes/${id}/annuler`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    alert('Commande annulée !');
+    charger();
+  }
+};
 
   const couleurStatut = (statut) => {
     const couleurs = {

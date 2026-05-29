@@ -11,11 +11,11 @@ export default function Finance() {
   useEffect(() => { charger(); }, []);
 
   const charger = async () => {
-    const res = await axios.get('${API}', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    setPartenaires(res.data);
-  };
+  const res = await axios.get(`${API}/api/admin/finance/partenaires`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  setPartenaires(res.data);
+};
 
   const reverser = async (id, montant, nom) => {
     if (montant <= 0) return alert('Solde insuffisant');

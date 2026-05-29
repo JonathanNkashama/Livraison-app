@@ -12,27 +12,27 @@ export default function Partners() {
   useEffect(() => { charger(); }, [filtre]);
 
   const charger = async () => {
-    const res = await axios.get(`${API}//api/admin/partenaires?valide=${filtre}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    setPartenaires(res.data);
-  };
+  const res = await axios.get(`${API}/api/admin/partenaires?valide=${filtre}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  setPartenaires(res.data);
+};
 
   const valider = async (id, email, nom) => {
-    await axios.put(`${API}//api/admin/partenaires/${id}/valider`, {}, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    alert(`✅ ${nom} validé ! Un email lui a été envoyé.`);
-    charger();
-  };
+  await axios.put(`${API}/api/admin/partenaires/${id}/valider`, {}, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  alert(`✅ ${nom} validé !`);
+  charger();
+};
 
   const suspendre = async (id) => {
-    await axios.put(`${API}//api/admin/partenaires/${id}/suspendre`, {}, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    alert('Partenaire suspendu !');
-    charger();
-  };
+  await axios.put(`${API}/api/admin/partenaires/${id}/suspendre`, {}, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  alert('Partenaire suspendu !');
+  charger();
+};
 
   return (
     <div style={styles.container}>
