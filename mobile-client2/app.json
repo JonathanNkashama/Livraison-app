@@ -10,6 +10,12 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FF6B35"
+      },
+      "package": "com.jonathan243.mobileclient2"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d33bab92-9cfc-41c2-8967-f463e59e4753"
       }
     }
   }
