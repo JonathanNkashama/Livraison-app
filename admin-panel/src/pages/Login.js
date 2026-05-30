@@ -9,16 +9,17 @@ export default function Login({ setToken }) {
   const [erreur, setErreur] = useState('');
 
   const handleLogin = async () => {
-    try {
-      const res = await axios.post(`${API}/api/auth/admin/login`, {
-        email, mot_de_passe: password
-      });
-      localStorage.setItem('adminToken', res.data.token);
-      setToken(res.data.token);
-    } catch (err) {
-      setErreur('Email ou mot de passe incorrect');
-    }
-  };
+  try {
+    const res = await axios.post(`${API}/api/auth/admin/login`, {
+      email, mot_de_passe: password
+    });
+    localStorage.setItem('adminToken', res.data.token);
+    setToken(res.data.token);
+    window.location.replace('/dashboard');
+  } catch (err) {
+    setErreur('Email ou mot de passe incorrect');
+  }
+};
 
   return (
     <div style={styles.container}>
