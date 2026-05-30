@@ -13,6 +13,7 @@ import CatalogScreen from './src/screens/Catalog/CatalogScreen';
 import AddProductScreen from './src/screens/Catalog/AddProductScreen';
 import WalletScreen from './src/screens/Wallet/WalletScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
+import EditProfileScreen from './src/screens/Profile/EditProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,6 +40,7 @@ function Navigation() {
           <>
             <Stack.Screen name="Main" component={TabNavigator} />
             <Stack.Screen name="AddProduct" component={AddProductScreen} />
+            <Stack.Screen name="EditProfile" component={EditProfileScreen} />
           </>
         ) : (
           <>

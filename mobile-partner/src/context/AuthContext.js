@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 
 const AuthContext = createContext();
@@ -8,30 +9,32 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const savedUser = localStorage.getItem('partnerUser');
-      if (savedUser) setPartenaire(JSON.parse(savedUser));
-    } catch (e) {}
-    setLoading(false);
+    const charger = async () => {
+      try {
+        const savedUser = await AsyncStorage.getItem('partnerUser');
+        if (savedUser) setPartenaire(JSON.parse(savedUser));
+      } catch (e) {}
+      setLoading(false);
+    };
+    charger();
   }, []);
 
   const login = async (email, mot_de_passe) => {
     const res = await api.post('/auth/partenaire/login', { email, mot_de_passe });
-    localStorage.setItem('partnerToken', res.data.token);
-    localStorage.setItem('partnerUser', JSON.stringify(res.data.user));
+    await AsyncStorage.setItem('partnerToken', res.data.token);
+    await AsyncStorage.setItem('partnerUser', JSON.stringify(res.data.user));
     setPartenaire(res.data.user);
     return res.data;
   };
 
   const logout = async () => {
-    localStorage.removeItem('partnerToken');
-    localStorage.removeItem('partnerUser');
+    await AsyncStorage.removeItem('partnerToken');
+    await AsyncStorage.removeItem('partnerUser');
     setPartenaire(null);
-    window.location.href = '/';
   };
 
   return (
-    <AuthContext.Provider value={{ partenaire, loading, login, logout }}>
+    <AuthContext.Provider value={{ partenaire, setPartenaire, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

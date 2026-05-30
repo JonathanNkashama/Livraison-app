@@ -1,10 +1,24 @@
 {
   "expo": {
-    "name": "Livraison Partner",
+    "name": "Partenaires App",
     "slug": "livraison-partner",
     "version": "1.0.0",
     "orientation": "portrait",
-    "updates": { "enabled": false },
-    "android": { "adaptiveIcon": { "backgroundColor": "#2ecc71" } }
+    "icon": "./assets/icon.png",
+    "updates": {
+      "enabled": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#2ecc71"
+      },
+      "package": "com.jonathan243.livraisonpartner"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "44419f9a-edb4-49cb-b910-708eda238c3b"
+      }
+    }
   }
 }

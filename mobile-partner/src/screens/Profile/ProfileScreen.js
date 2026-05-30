@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   const { partenaire, logout } = useAuth();
 
   const handleLogout = () => {
-    if (window.confirm('Voulez-vous vraiment vous déconnecter ?')) logout();
+    Alert.alert('Déconnexion', 'Voulez-vous vraiment vous déconnecter ?', [
+      { text: 'Annuler' },
+      { text: 'Déconnecter', style: 'destructive', onPress: logout }
+    ]);
   };
 
   return (
@@ -43,6 +46,13 @@ export default function ProfileScreen() {
         ))}
       </View>
 
+      <TouchableOpacity
+        style={styles.btnModifier}
+        onPress={() => navigation.navigate('EditProfile')}
+      >
+        <Text style={styles.btnModifierText}>✏️ Modifier mon profil</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.btnDeconnexion} onPress={handleLogout}>
         <Text style={styles.btnDeconnexionText}>🚪 Se déconnecter</Text>
       </TouchableOpacity>
@@ -68,6 +78,8 @@ const styles = StyleSheet.create({
   infoLabel: { fontSize: 12, color: '#999' },
   infoValeur: { fontSize: 15, fontWeight: '600', color: '#1a1a2e', marginTop: 2 },
   separateur: { height: 1, backgroundColor: '#f0f0f0', marginHorizontal: 12 },
-  btnDeconnexion: { backgroundColor: '#fce4e4', margin: 16, padding: 16, borderRadius: 12, alignItems: 'center' },
+  btnModifier: { backgroundColor: '#e8f5e9', margin: 16, marginBottom: 8, padding: 16, borderRadius: 12, alignItems: 'center' },
+  btnModifierText: { color: '#2ecc71', fontWeight: '700', fontSize: 16 },
+  btnDeconnexion: { backgroundColor: '#fce4e4', margin: 16, marginTop: 8, padding: 16, borderRadius: 12, alignItems: 'center' },
   btnDeconnexionText: { color: '#e74c3c', fontWeight: '700', fontSize: 16 }
 });

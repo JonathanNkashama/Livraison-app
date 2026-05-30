@@ -1,12 +1,13 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const BASE_URL = 'https://livraison-app-bnwk.vercel.app/api';
 
 const api = axios.create({ baseURL: BASE_URL });
 
-api.interceptors.request.use((config) => {
+api.interceptors.request.use(async (config) => {
   try {
-    const token = localStorage.getItem('partnerToken');
+    const token = await AsyncStorage.getItem('partnerToken');
     if (token) config.headers.Authorization = `Bearer ${token}`;
   } catch (e) {}
   return config;
